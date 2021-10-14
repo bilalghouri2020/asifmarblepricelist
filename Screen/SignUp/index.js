@@ -1,9 +1,13 @@
 import axios from 'axios';
 import React, { useState } from 'react'
-import { View, Text, TextInput, StyleSheet, Alert } from 'react-native';
+import { View, Text, TextInput, StyleSheet, Alert, ImageBackground, Dimensions, ScrollView } from 'react-native';
 import { Button } from 'react-native-elements';
+import Layout from '../LoginLayout'
+
+const dimensions = Dimensions.get('screen')
 
 export default function index({ navigation }) {
+
 
     const [firstName, setFirstName] = useState();
     const [lastName, setLastName] = useState();
@@ -24,36 +28,65 @@ export default function index({ navigation }) {
             Alert.alert('')
         })
     }
-
+    console.log(dimensions.width);
     return (
-        <View>
-            <Text>Sign Up Screen</Text>
-            <TextInput onChangeText={setFirstName} value={firstName} style={styles.input} placeholder="Enter Your First Name" />
-            <TextInput onChangeText={setLastName} value={lastName} style={styles.input} placeholder="Enter Your Last Name" />
-            <TextInput onChangeText={setEmail} value={email} style={styles.input} placeholder="Enter Your Email" />
-            <TextInput secureTextEntry={true} onChangeText={setPassword} value={password} style={styles.input} placeholder="Enter Your Password" />
-            <Button
-                title="Save"
-                onPress={saveUserHandler}
-            />
-
-            <Button
-                title="Sign in"
-                onPress={() => navigation.navigate('Login')}
-            />
-        </View>
+        <Layout>
+            <ScrollView>
+                <Text style={{ textAlign: 'center', margin: 50, color: 'white', fontSize: dimensions.width / 12 }}>
+                    Create Your A/C
+                </Text>
+                <View style={styles.inputContainer}>
+                    <TextInput onChangeText={setFirstName} value={firstName} style={styles.input} placeholder="Enter Your First Name" placeholderTextColor="white" />
+                    <TextInput onChangeText={setLastName} value={lastName} style={styles.input} placeholder="Enter Your Last Name" placeholderTextColor="white" />
+                    <TextInput onChangeText={setEmail} value={email} style={styles.input} placeholder="Enter Your Email" placeholderTextColor="white" />
+                    <TextInput secureTextEntry={true} onChangeText={setPassword} value={password} style={styles.input} placeholder="Enter Your Password" placeholderTextColor="white" />
+                    <View style={styles.button}>
+                        <Button
+                            title="Save"
+                            onPress={saveUserHandler}
+                        />
+                    </View>
+                    <View style={styles.button}>
+                        <Button
+                            title="Sign in"
+                            onPress={() => navigation.navigate('Login')}
+                        />
+                    </View>
+                </View>
+            </ScrollView>
+        </Layout>
     )
 }
 
 
 const styles = StyleSheet.create({
+    inputContainer: {
+        flex: 2,
+        justifyContent: 'center',
+        alignItems: 'center',
+        height: '100%'
+    },
     input: {
-        borderWidth: 2,
-        borderColor: 'gray',
+        borderTopWidth: 0,
+        borderBottomWidth: 3,
+        borderLeftWidth: 3,
+        paddingHorizontal: 20,
+        borderColor: 'white',
+        color: 'white',
         borderRadius: 5,
         margin: 10,
         padding: 5,
+        width: dimensions.width / 1.3
+    },
+    buttonContainer: {
+
+
+    },
+    button: {
+        width: dimensions.width / 1.3,
+        marginVertical: 10,
 
     }
+
 })
 

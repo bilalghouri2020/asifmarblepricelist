@@ -1,11 +1,10 @@
 import React, { useEffect } from 'react';
-import { SafeAreaView, View, Text, Alert } from 'react-native';
+import { SafeAreaView, View, Text, Alert, ImageBackground, Dimensions, ScrollView } from 'react-native';
 import axios from 'axios';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
-import { Button, ThemeProvider } from 'react-native-elements';
-import { useColorScheme } from 'react-native-appearance';
+import { Button, ThemeProvider, Header } from 'react-native-elements';
 // import Screens
 import HomePage from './Screen/Home';
 import LoginPage from './Screen/Login';
@@ -17,8 +16,8 @@ const theme = {
   Button: {
     raised: true,
     titleStyle: {
-      color: 'blue',
-    },
+      color: 'white'
+    }
   },
 };
 
@@ -29,7 +28,6 @@ const App = () => {
   useEffect(() => {
     getData()
   }, [])
-  let colorScheme = new useColorScheme();
 
   const getData = () => {
     axios.get('http:/10.0.2.2:3000/').then((res) => {
@@ -42,10 +40,16 @@ const App = () => {
   console.log('update');
   return (
     <SafeAreaProvider>
-      <ThemeProvider theme={theme} useDark={colorScheme === 'dark'}>
+      <ThemeProvider theme={theme}>
+        {/* <Header
+          placement="left"
+          leftComponent={{ icon: 'menu', color: '#fff' }}
+          centerComponent={{ text: 'MY TITLE', style: { color: '#fff' } }}
+          rightComponent={{ icon: 'home', color: '#fff' }}
+        /> */}
         <NavigationContainer>
           <Stack.Navigator
-            initialRouteName="Home"
+            initialRouteName="SignUp"
             screenOptions={{
               headerShown: false
             }}>
